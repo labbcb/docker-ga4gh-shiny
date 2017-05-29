@@ -6,39 +6,20 @@ By default, it connects to [Hosting Thousand Genomes Project](http://1kgenomes.g
 To run this image, execute:
 
 ``` bash
-docker run -d -p 3838:3838 welliton/ga4gh-shiny
+docker run --rm --name ga4gh-shiny -d -p 3838:3838 welliton/ga4gh-shiny
 ```
 
 It will be available at <http://localhost:3838/>.
-
-To change the default GA4GH server endpoint, edit `app.R` file:
-
-``` R
-# Shiny application that runs GA4GHshiny connected at one GA4GH server.
-# For this example, it connects at "Hosting Thousand Genomes Project".
-# <http://1kgenomes.ga4gh.org/>
-library(GA4GHshiny)
-
-# Set URL of the GA4GH server endpoint.
-host <- "1kgenomes.ga4gh.org"
-
-# Set annotation packages required to 'search by genes' work.
-# Set 'NA' for both 'txDb' and 'orgDb' to disable this kind of search feature.
-# <https://www.bioconductor.org/help/workflows/annotation/annotation/>
-txDb <- "TxDb.Hsapiens.UCSC.hg38.knownGene"
-orgDb <- "org.Hs.eg.db"
-
-# Set GA4GH server name. Set 'NA' for 'serverName' to show only URL.
-serverName = "Hosting Thousand Genomes Project"
-
-# Run Shiny app
-app(host, orgDb, txDb, serverName)
-```
-
-Execute the changing the default `app.R` file:
+To stop container run.
 
 ``` bash
-docker run -v ~/app.R:/srv/shiny-server/app.R -p 3838:3838 welliton/ga4gh-shiny
+docker stop ga4gh-shiny
+```
+
+To change the default GA5GH server endpoint, edit `app.R` file and mount file using `-v` argument. 
+
+``` bash
+docker run --rm -d -v ~/app.R:/srv/shiny-server/app.R -p 3838:3838 welliton/ga4gh-shiny
 ```
 
 It is possible to have many Shiny applications running at the same server.

@@ -1,0 +1,28 @@
+#!/bin/bash
+set -e
+
+if [ -z "$HOST" ]; then
+  export HOST="http://1kgenomes.ga4gh.org/"
+fi
+
+cat << EOF > /srv/shiny-server/app.R
+
+library(GA4GHshiny)
+host <- "${HOST}"
+txDb <- "${TXDB}"
+orgDb <- "${ORGDB}"
+serverName = "${SERVER_NAME}"
+
+is.na(txDb) <- txDb == ""
+is.na(orgDb) <- orgDb == ""
+
+if(serverName == "")
+ serverName <- host
+
+app(host, orgDb, txDb, serverName)
+
+EOF
+
+exec "$@"
+
+

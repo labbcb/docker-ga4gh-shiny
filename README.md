@@ -1,12 +1,15 @@
 # Docker image for GA4GHshiny package
 
-This Docker image provides the [GA4GHshiny Bioconductor package](https://bioconductor.org/packages/GA4GHshiny) running at [ShinyServer](https://www.rstudio.com/products/shiny/shiny-server/).
+This Docker image provides the [GA4GHshiny Bioconductor package](https://bioconductor.org/packages/GA4GHshiny).
+GA4GHshiny package provides an easy way to interact with data servers based on Global Alliance for Genomics and Health (GA4GH) genomics API through a Shiny application.
+It also integrates with Beacon Network.
+The web application runs on [Shiny Server](https://www.rstudio.com/products/shiny/shiny-server/) exposing the TCP port 3838.
 By default, it connects to [Hosting Thousand Genomes Project](http://1kgenomes.ga4gh.org/).
 
 To run this image, execute:
 
 ``` bash
-docker run --name ga4gh-shiny --detach --publish 3838:3838 --rm welliton/ga4gh-shiny
+docker container run --detach --name ga4gh-shiny --publish 3838:3838 --rm welliton/ga4gh-shiny
 ```
 
 It will be available at <http://localhost:3838/>.
@@ -24,12 +27,12 @@ To change the default GA4GH server endpoint set environment variables:
 - `SERVER_NAME` Name of the GA4GH server name (should be none or string).
 
 ``` bash
-docker run --detach --name ga4gh-shiny \
+docker run --detach \
   --env HOST=http://1kgenomes.ga4gh.org/ \
   --env TXDB=TxDb.Hsapiens.UCSC.hg19.knownGene \
   --env ORGDB=org.Hs.eg.db \
   --env SERVER_NAME="Hosting Thousand Genomes Project" \
-  --publish 3838:3838 --rm welliton/ga4gh-shiny
+  --name ga4gh-shiny --publish 3838:3838 --rm welliton/ga4gh-shiny
 ```
 
 ## Buiding this image

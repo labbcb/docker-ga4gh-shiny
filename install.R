@@ -21,5 +21,5 @@ for (pkg in pkgs)
 
 suppressWarnings(BiocInstaller::biocValid(fix = TRUE, ask = FALSE))
 
-devtools::install_github("Bioconductor-mirror/GA4GHclient")
-devtools::install_github("Bioconductor-mirror/GA4GHshiny")
+devtools::install_github("labbcb/GA4GHclient")
+devtools::install_github("labbcb/GA4GHshiny")

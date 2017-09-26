@@ -13,7 +13,7 @@ pkgs <- c("org.Hs.eg.db", "TxDb.Hsapiens.UCSC.hg38.knownGene",
     "BiocGenerics", "dplyr", "DT", "GenomeInfoDb", "GenomicFeatures",
     "purrr", "S4Vectors", "shiny", "shinydashboard", "shinyjs", "tidyr",
     "Biostrings", "GenomicRanges", "httr", "IRanges", "jsonlite",
-    "VariantAnnotation", "devtools")
+    "VariantAnnotation", "devtools", "openxlsx")
 
 for (pkg in pkgs)
     if (!suppressWarnings(require(pkg, character.only = TRUE)))
